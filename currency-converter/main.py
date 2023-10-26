@@ -68,7 +68,7 @@ class UpdateCurrency():
                         print('请先在 https://app.currencyapi.com/ 申请免费API使用')
                         return
                     result = Currency.get_api_info()
-                elif current_time.second - exists_currency_time.second >= interval:# 如果日期一样相差超过6小时就更新汇率
+                elif current_time.hour - exists_currency_time.hour >= interval:# 如果日期一样相差超过6小时就更新汇率
                     # API为空，无法更新
                     if self.is_api_empty():
                         print('请先在 https://app.currencyapi.com/ 申请免费API使用')

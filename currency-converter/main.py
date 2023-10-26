@@ -32,20 +32,17 @@ class UpdateCurrency():
         :params: interval: 每隔多少小时更新汇率信息
         """
         result = None
-        # API和汇率内容都为空，提示申请API
-        if self.is_api_empty() and self.is_content_empty():
-            print('请先在 https://app.currencyapi.com/ 申请免费API使用')
-            return
-        
+
         # 文件不存在，且API为空，提示申请API
         if not os.path.exists(self.currency_file) and self.is_api_empty():
             print('请先在 https://app.currencyapi.com/ 申请免费API使用')
             return
-
+        
         # 文件不存在，但API不为空
         if not os.path.exists(self.currency_file) and not self.is_api_empty():
             result = Currency.get_api_info()
         
+
         # 文件存在
         if os.path.exists(self.currency_file):
             # 如果文件内容为空
@@ -71,7 +68,7 @@ class UpdateCurrency():
                         print('请先在 https://app.currencyapi.com/ 申请免费API使用')
                         return
                     result = Currency.get_api_info()
-                elif current_time.hour - exists_currency_time.hour >= interval:# 如果日期一样相差超过6小时就更新汇率
+                elif current_time.second - exists_currency_time.second >= interval:# 如果日期一样相差超过6小时就更新汇率
                     # API为空，无法更新
                     if self.is_api_empty():
                         print('请先在 https://app.currencyapi.com/ 申请免费API使用')
@@ -88,17 +85,6 @@ class UpdateCurrency():
 
 class CurrencyConverter():
     def __init__(self, update: UpdateCurrency):
-        # 检查汇率更新情况
-        # self.check_currency = update.is_content_empty()
-        # self.currency_file = 'currency.json'
-        # if self.check_currency:
-        #     check_res = update.check()
-        # else:
-        #     check_res = True
-        # if check_res:
-        #     self.currency = self.getAllCurrency()
-        #     self.USD = self.getOneCurrency()
-        #     self.run()
         self.currency_file = 'currency.json'
         check_res = update.check()
         if check_res:

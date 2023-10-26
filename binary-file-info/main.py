@@ -16,9 +16,30 @@ utf8_bom = bytes.fromhex('EF BB BF')
 def file_size(filename):
     file_size_in_bytes = os.stat(filename).st_size  # returns file size in bytes
     # Write the functionality to check the file size and convert it to their respective KB, MB or GB
+    if file_size_in_bytes // 1000000000 > 0:
+        file_size = round(file_size_in_bytes / 1000000000, 2)
+        return f'{file_size} GB'
+    elif file_size_in_bytes // 1000000 > 0:
+        file_size = round(file_size_in_bytes / 1000000, 2)
+        return f'{file_size} MB'
+    else:
+        file_size = round(file_size_in_bytes/1000, 2)
+        return f'{file_size} KB'
         
 def file_type(filename):
-    pass
+    with open(filename, 'rb') as f:
+        filecontent = f.read()
+    if filecontent.startswith(pdf):
+        return 'PDF'
+    if filecontent.startswith(gif):
+        return 'GIF'
+    if filecontent.startswith(png):
+        return 'PNG'
+    if filecontent.startswith(jpeg_start) and filecontent.endswith(jpeg_end):
+        return 'JPEG'
+    if filecontent.startswith(utf8_bom):
+        return 'UTF-8'
+        
 
 def file_info(filename):
     if not os.path.isfile(filename):

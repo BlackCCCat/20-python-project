@@ -13,19 +13,26 @@ if os.path.exists(CLIPBOARD_FILE):
 
 # Function to copy text to the clipboard
 def copy(keyword, text):
-    pass
+    # 无法复制相同的关键词内容
+    clipboard_storage.update({keyword: text})
+    save_clipboard_data()
 
 # Function to paste text from the clipboard
 def paste(keyword):
-    pass
+    content = clipboard_storage.get(keyword)
+    return content
 
 # Function to list available keywords
 def list_keywords():
-    pass
+    return list(clipboard_storage.keys())
 
 # Function to clear text associated with a keyword
 def clear(keyword):
-    pass
+    if keyword in clipboard_storage.keys():
+        del clipboard_storage[keyword]
+        save_clipboard_data()
+    else:
+        print(f'{keyword} not found.')
 
 # Function to save clipboard data to the file
 def save_clipboard_data():
@@ -72,3 +79,4 @@ if __name__ == '__main__':
 
     else:
         print("Invalid action. Use 'copy', 'paste', 'list', or 'clear'")
+        

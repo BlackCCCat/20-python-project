@@ -7,8 +7,8 @@ from api import ApiInfo
 
 
 class UpdateCurrency():
-    def __init__(self) -> None:
-        self.currency_file = 'currency.json'
+    def __init__(self, currency_file='currency.json'):
+        self.currency_file = currency_file
     
     def is_api_empty(self):
         # 检查API是否存在
@@ -84,7 +84,7 @@ class UpdateCurrency():
 
 
 class CurrencyConverter():
-    def __init__(self, update: UpdateCurrency):
+    def __init__(self, update):
         self.currency_file = 'currency.json'
         check_res = update.check()
         if check_res:
@@ -132,8 +132,8 @@ class CurrencyConverter():
 
 
 if __name__ == "__main__":
-    UpdateCurrency = UpdateCurrency()
-    CurrencyConverter(UpdateCurrency)
+    uc = UpdateCurrency()
+    CurrencyConverter(uc)
 
 
 

@@ -15,15 +15,30 @@ To use the Directory Maintainer, execute the following command in your terminal:
 
 ### Automated File Organization
 The Directory Maintainer automates the process of creating folders for various file extensions and organizing the files accordingly. You no longer need to manually sort files; this tool does it for you.
+```shell
+python main.py [path] --organize
+```
 
 ### Removal of Older Log Files
 It identifies and deletes older log files, helping you manage storage space efficiently.
+```shell
+python main.py [path] --delete-log
+python main.py [path] --delete-log --days n
+```
 
 ### Segregation of Cleaned and Raw Log Files
 The program separates cleaned log files from raw ones, streamlining data processing and analysis.
+```shell
+python main.py [path] --log-separate
+```
 
 ### Handling Large Text Files
 Large text files are moved to a separate folder within the '.txt' directory, making it easier to access and manage them.
+```shell
+python main.py [path] --organize --include-large-file
+python main.py [path] --organize --include-large-file --size n
+```
+
 
 ## Usage Example
 Suppose you have a directory named "MyFiles" that contains various files, including logs, text files, and PDFs. To use the Directory Maintainer, you would run the following command:
